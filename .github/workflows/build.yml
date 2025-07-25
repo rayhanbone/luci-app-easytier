@@ -66,10 +66,10 @@ jobs:
             token: ${{ secrets.GITHUB_TOKEN }}
             body: |
 
-             - Di antara mereka, **`openwrt-22.03`** berisi paket instalasi ipk dan **`SNAPSHOT`** berisi paket instalasi apk
+             - Di antara mereka, **`openwrt-24.10`** berisi paket instalasi ipk dan **`SNAPSHOT`** berisi paket instalasi apk
 
              - **`*.apk` adalah versi baru paket OpenWrt APK** Lewati perintah sertifikat untuk paket apk
-             `apk add --allow-untrusted luci-app-easytier.apk`
+             `apk add --allow-untrusted luci-app-modem-auto-reboot.apk`
 
              ${{ github.event.inputs.text }}
            
