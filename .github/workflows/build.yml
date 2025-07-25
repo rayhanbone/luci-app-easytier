@@ -1,15 +1,15 @@
-name: Build-OpenWrt-modem-auto-reboot
+name: Build-OpenWrt-EasyTier
 
 on:
   push:
   workflow_dispatch:
     inputs:
       tag:
-        deskripsi: 'Silakan isi nomor versi Rilis (kosongkan untuk tidak dipublikasikan)'
+        description: '请填写发布Releases的版本号（留空不发布）'
         required: false
         default: ''
       text:
-        deskripsi: 'Silakan isi deskripsi rilis'
+        description: '请填写发布的说明'
         required: false
         default: ''
 concurrency:
@@ -28,11 +28,10 @@ jobs:
       fail-fast: false
       matrix:
         arch:
-          - aarch64_cortex-a53
           - aarch64_generic
-          - x86_64
         sdk:
-          - openwrt-24.10
+          - openwrt-22.03
+          - SNAPSHOT
 
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +43,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
           FEEDNAME: packages_ci
-          PACKAGES: luci-app-modem-auto-reboot
+          PACKAGES: easytier luci-app-easytier luci-app-modem-auto-reboot
           NO_REFRESH_CHECK: true
           V: s
 
@@ -66,10 +65,10 @@ jobs:
             token: ${{ secrets.GITHUB_TOKEN }}
             body: |
 
-             - Di antara mereka, **`openwrt-24.10`** berisi paket instalasi ipk dan **`SNAPSHOT`** berisi paket instalasi apk
+             - 其中 **`openwrt-22.03`** 里面是ipk安装包 **`SNAPSHOT`** 里面是apk安装包
 
-             - **`*.apk` adalah versi baru paket OpenWrt APK** Lewati perintah sertifikat untuk paket apk
-             `apk add --allow-untrusted luci-app-modem-auto-reboot.apk`
+             - **`*.apk` 是OpenWrt新版的APK包** 对于apk包跳过证书命令
+             `apk add --allow-untrusted luci-app-easytier.apk`
 
              ${{ github.event.inputs.text }}
            
