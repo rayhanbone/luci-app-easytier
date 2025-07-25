@@ -33,7 +33,6 @@ jobs:
           - x86_64
         sdk:
           - openwrt-24.10
-          - SNAPSHOT
 
     steps:
       - uses: actions/checkout@v4
