@@ -1,4 +1,4 @@
-name: Build-OpenWrt-EasyTier
+name: Build-OpenWrt-modem-auto-reboot
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
           FEEDNAME: packages_ci
-          PACKAGES: easytier luci-app-easytier
+          PACKAGES: luci-app-modem-auto-reboot
           NO_REFRESH_CHECK: true
           V: s
 
